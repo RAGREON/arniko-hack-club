@@ -1,46 +1,105 @@
 body {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
+  gap: 10px;
+
+  margin: 0;
+
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #adb4b8c4;
+
+  max-height: 100vh;
 }
 
+.board-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+h1 {
+  margin: 0px;
+}
 
 :root {
-  --subgrid-width: 220px;
-  --subgrid-height: 220px;
+	--subgrid-width: 205px;
+	--subgrid-height: 205px;
 
-  --cell-width: 60px;
-  --cell-height: 60px;
+	--cell-width: 60px;
+	--cell-height: 60px;
+
+	--board-background: #1d2021a6;
 }
 
 .row {
+	display: flex;
+	gap: 5px;
+}
 
-  display: flex;
-  gap: 5px;
+.board {
+	background-color: var(--board-background);
+	border-radius: 5px;
 }
 
 .sub-grid {
-  background-color: green;
-  border: 1px solid yellow;
+	width: var(--subgrid-width);
+	height: var(--subgrid-height);
 
-  width: var(--subgrid-width);
-  height: var(--subgrid-height);
-
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(3, 1fr);
-  place-items: center;
+	display: grid;
+	grid-template-rows: repeat(3, 1fr);
+	grid-template-columns: repeat(3, 1fr);
+	place-items: center;
 }
 
-.cell {
-  display: flex;
-  background-color: violet;
-  width: var(--cell-width);
-  height: var(--cell-height);
+.cell,
+.numCell {
+	display: flex;
+	width: var(--cell-width);
+	height: var(--cell-height);
 
-  justify-content: center;
-  align-items: center;
+	color: whitesmoke;
+	border: 1px solid whitesmoke;
+	border-radius: 5px;
+
+	justify-content: center;
+	align-items: center;
+
+	font-weight: bold;
+	cursor: pointer;
 }
 
+.numpad {
+	background-color: var(--board-background);
+	display: grid;
+	grid-template-rows: repeat(3, 1fr);
+	grid-template-columns: repeat(3, 1fr);
+	place-items: center;
 
+	border-radius: 5px;
+	gap: 5px;
+	padding: 2px;
+
+	transition: 0.2s;
+	cursor: pointer;
+}
+
+.cell:hover,
+.numCell:hover {
+	opacity: 0.8;
+	background-color: #1d2021a6;
+	color: blanchedalmond;
+}
+
+.cell.active {
+	animation: activeSelectAnimation forwards 0.3s;
+}
+
+@keyframes activeSelectAnimation {
+	from {
+	}
+	to {
+		background-color: #3c424591;
+	}
+}
