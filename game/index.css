@@ -16,7 +16,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap: 20px;
+	gap: 40px;
 }
 
 h1 {
@@ -24,8 +24,8 @@ h1 {
 }
 
 :root {
-	--subgrid-width: 205px;
-	--subgrid-height: 205px;
+	--subgrid-width: 210px;
+	--subgrid-height: 210px;
 
 	--cell-width: 60px;
 	--cell-height: 60px;
@@ -51,6 +51,12 @@ h1 {
 	grid-template-rows: repeat(3, 1fr);
 	grid-template-columns: repeat(3, 1fr);
 	place-items: center;
+  
+  border: 1px solid rgba(0, 0, 0, 0.268);
+  
+  padding: 3px;
+
+  gap: 10px;
 }
 
 .cell,
@@ -83,6 +89,8 @@ h1 {
 
 	transition: 0.2s;
 	cursor: pointer;
+
+  width: 210px;
 }
 
 .cell:hover,
@@ -102,4 +110,34 @@ h1 {
 	to {
 		background-color: #3c424591;
 	}
+}
+
+.lives-numpad-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  min-width: 250px;
+  min-height: 400px;
+}
+
+
+.lives-wrapper {
+  font-size: 1.5rem;
+  display: flex;
+  gap: 5px;
+}
+
+.life-heart {
+  color: rgb(173, 26, 26);
+}
+
+.submit {
+  background-color: green;
+  color: whitesmoke;
+  border: none;
+  border-radius: 10px;
+  width: 120px;
+  height: 40px;
+  font-size: 1.25rem;
 }

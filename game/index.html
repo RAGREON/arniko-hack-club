@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-		<link rel="stylesheet" href="./index.css" />
-		<script src="./index.js" defer></script>
-	</head>
-	<body>
-    <h1>Ramey's Sudoku</h1>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 80vw;
+      min-height: 80vh;
+      max-width: 90vw;
+    }
 
-		<div class="board-wrapper">
-			<div class="board"></div>
+    .play-button { 
+      background-color: green;
+      color: white;
+      border: none;
 
-			<div class="numpad"></div>
-		</div>
-	</body>
+      width: 400px;
+      height: 200px;
+
+
+      border-radius: 40px;
+
+      font-weight: bold;
+      font-size: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <button class="play-button" onclick="playgame()">Play</button> 
+
+  <script>
+    const playgame = () => {
+      window.location.href = "./game.html"
+    }
+  </script>
+</body>
 </html>

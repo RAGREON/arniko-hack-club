@@ -3,6 +3,25 @@ const board = document.querySelector(".board");
 const rows = 9;
 const cols = 9;
 
+const remLives = document.getElementById("rem-lives");
+const livesWrapper = document.querySelector(".lives-wrapper");
+
+const choice = document.querySelector(".choice");
+let _rem = 5
+
+const reduceLife = () => {
+  _rem--
+
+  if (_rem == 0) {
+    livesWrapper.innerHTML = ""
+    alert("you lose")
+  }
+
+  if (livesWrapper) {
+    livesWrapper.lastElementChild?.remove()
+  }
+};
+
 const boardArray = Array.from({ length: rows }, () => Array(cols).fill(0));
 
 console.log(boardArray);
@@ -42,7 +61,7 @@ const fillSudoku = (board) => {
 	return true;
 };
 
-const createUserBoardArray = (fullBoard, fillPercent = 0.3) => {
+const createUserBoardArray = (fullBoard, fillPercent = 0.1) => {
 	const userBoard = fullBoard.map((row) => row.slice()); // copy the full board
 	let unfilledCount = 0;
 
@@ -161,6 +180,7 @@ document.addEventListener("keydown", (e) => {
 	} else {
 		console.log(value);
 		// alert("Invalid number for this cell! ", value);
+		reduceLife();
 	}
 });
 
@@ -176,11 +196,11 @@ const generateNumpad = () => {
 
 		numCell.addEventListener("click", () => {
 			if (!activeCell) return;
-   
+
 			const row = parseInt(activeCell.getAttribute("row"));
 			const col = parseInt(activeCell.getAttribute("col"));
 
-      const value = numCell.getAttribute("value")
+			const value = numCell.getAttribute("value");
 
 			if (boardArray[row][col] == value) {
 				activeCell.innerText = value;
@@ -204,6 +224,7 @@ const generateNumpad = () => {
 			} else {
 				console.log(value);
 				// alert("Invalid number for this cell! ", value);
+				reduceLife();
 			}
 		});
 
@@ -212,3 +233,43 @@ const generateNumpad = () => {
 };
 
 generateNumpad();
+
+const generateHealthBar = (count) => {
+	for (let i = 0; i < count; i++) {
+		const heart = document.createElement("i");
+		heart.classList.add("fa-solid", "fa-heart", "life-heart");
+
+		livesWrapper.appendChild(heart);
+	}
+};
+
+generateHealthBar(_rem);
+
+
+const submitBoard = () => {
+  let correct = true;
+
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      if (userBoard[i][j] !== boardArray[i][j]) {
+        correct = false;
+
+        // highlight wrong cell
+        const cell = document.querySelector(
+          `.cell[row='${i}'][col='${j}']`
+        );
+        if (cell) {
+          cell.classList.add("wrong");
+          setTimeout(() => cell.classList.remove("wrong"), 1000);
+        }
+      }
+    }
+  }
+
+  if (correct) {
+    alert("🎉 Congratulations! You solved it!");
+  } else {
+    reduceLife();
+    alert("❌ Some numbers are wrong. Try again!");
+  }
+};
