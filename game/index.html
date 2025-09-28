@@ -7,11 +7,15 @@
   <style>
     body {
       display: flex;
+
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       min-width: 80vw;
       min-height: 80vh;
       max-width: 90vw;
+
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     .play-button { 
@@ -31,6 +35,9 @@
   </style>
 </head>
 <body>
+
+  <h1>Ramey's Sudoku</h1>
+
   <button class="play-button" onclick="playgame()">Play</button> 
 
   <script>
