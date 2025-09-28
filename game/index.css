@@ -1,0 +1,46 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+:root {
+  --subgrid-width: 220px;
+  --subgrid-height: 220px;
+
+  --cell-width: 60px;
+  --cell-height: 60px;
+}
+
+.row {
+
+  display: flex;
+  gap: 5px;
+}
+
+.sub-grid {
+  background-color: green;
+  border: 1px solid yellow;
+
+  width: var(--subgrid-width);
+  height: var(--subgrid-height);
+
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+}
+
+.cell {
+  display: flex;
+  background-color: violet;
+  width: var(--cell-width);
+  height: var(--cell-height);
+
+  justify-content: center;
+  align-items: center;
+}
+
+
