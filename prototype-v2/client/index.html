@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>Screen Share Demo</h2>
+    <button id="startHost">Start as Host</button>
+    <button id="startViewer">Start as Viewer</button>
+    <video id="remoteVideo" autoplay playsinline></video>
+
+    <script type="module">
+      import { ScreenShareClient } from "./client.js";
+
+      document.getElementById("startHost").onclick = () => {
+        new ScreenShareClient("http://localhost:8080", "room1", "host");
+      };
+
+      document.getElementById("startViewer").onclick = () => {
+        new ScreenShareClient("http://localhost:8080", "room1", "viewer");
+      };
+    </script>
+  </body>
+</html>

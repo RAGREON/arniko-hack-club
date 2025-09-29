@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Client View</title>
+	</head>
+	<body>
+		<h2>Remote Video</h2>
+		<video id="remoteVideo" autoplay></video>
+
+		<script>
+			const ws = new WebSocket("ws://localhost:8080");
+			const video = document.getElementById("remoteVideo");
+			const mediaSource = new MediaSource();
+			video.src = URL.createObjectURL(mediaSource);
+
+			mediaSource.addEventListener("sourceopen", () => {
+				const sourceBuffer = mediaSource.addSourceBuffer(
+					'video/webm; codecs="vp8, opus"'
+				);
+				const queue = []; // queue chunks if buffer is busy
+
+				const appendNext = () => {
+					if (!queue.length || sourceBuffer.updating) return;
+					const chunk = queue.shift();
+					sourceBuffer.appendBuffer(chunk);
+				};
+
+				sourceBuffer.addEventListener("updateend", appendNext);
+
+				ws.onmessage = (event) => {
+					const reader = new FileReader();
+					reader.onload = () => {
+						queue.push(new Uint8Array(reader.result));
+						appendNext();
+					};
+					reader.readAsArrayBuffer(event.data);
+				};
+			});
+		</script>
+	</body>
+</html>
